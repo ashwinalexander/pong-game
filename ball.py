@@ -13,11 +13,10 @@ class Ball(Turtle):
         # or negative value
         self.x_move = 10
         self.y_move = 10
+        self.move_speed = .1
 
     def move(self):
         self.goto(self.xcor()+self.x_move,self.ycor()+self.y_move)
-        # self.setheading(45)
-        # self.forward(10)
 
     # key bounce logic: Just change the direction of Y coordinate
     def y_bounce(self):
@@ -26,7 +25,9 @@ class Ball(Turtle):
     # key bounce logic: Just change the direction of X coordinate
     def x_bounce(self):
         self.x_move *= -1
+        self.move_speed *= .9
 
     def ball_reset(self):
         self.goto(0,0)
+        self.move_speed = .1
         self.x_bounce()

@@ -11,6 +11,7 @@ import time
 from turtle import Screen
 from paddle import Paddle
 from ball import Ball
+from scoreboard import Scoreboard
 # Setup the screen
 screen = Screen()
 screen.setup(width=800, height=600)
@@ -23,7 +24,7 @@ screen.tracer(0)
 right_paddle = Paddle((360,0))
 left_paddle = Paddle((-360,0))
 ball = Ball()
-
+scoreboard = Scoreboard()
 screen.update()
 
 screen.listen()
@@ -34,13 +35,12 @@ screen.onkey(left_paddle.down,"s")
 
 game_is_on = True
 while game_is_on:
-    time.sleep(.1)
+    time.sleep(ball.move_speed)
     screen.update()
     ball.move()
 
     # collision with the upper and lower boundary walls
     if(ball.ycor() >=275 or ball.ycor() <=-275):
-        print("coming here")
         ball.y_bounce()
 
     # collision with the paddles
@@ -53,10 +53,14 @@ while game_is_on:
 
     # when paddles miss
     if ball.xcor() > 380:
-        ball.reset(0, 0)
+        ball.ball_reset()
+        scoreboard.left_point_increment()
+
 
     if ball.xcor() < -380:
-        ball.reset(0,0)
+        ball.ball_reset()
+        scoreboard.right_point_increment()
+
 
 
 
