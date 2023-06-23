@@ -26,3 +26,7 @@ class Ball(Turtle):
     # key bounce logic: Just change the direction of X coordinate
     def x_bounce(self):
         self.x_move *= -1
+
+    def ball_reset(self):
+        self.goto(0,0)
+        self.x_bounce()
